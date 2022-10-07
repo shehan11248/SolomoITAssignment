@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 const App = () => {
   StatusBar.setBackgroundColor('rgba(0,0,0,0)');
-  StatusBar.setBarStyle('light-content');
+  StatusBar.setBarStyle('dark-content');
   StatusBar.setTranslucent(true);
 
   const store = createStore(reducer, {}, applyMiddleware(ReduxThunk));
