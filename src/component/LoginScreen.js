@@ -3,13 +3,48 @@ import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import Style from '../styles/LoginScreenStyle';
+import {showMessage} from 'react-native-flash-message';
+import {
+  setLoginPassword,
+  setLoginUserName,
+  loginUser,
+} from '../actions/loginActions';
 
 const LoginScreen = props => {
   const navigation = useNavigation();
 
+  const login = () => {
+    if (props.loginUserName !== '') {
+      if (props.loginPassword !== '') {
+        let obj = {
+          username: props.loginUserName,
+          password: props.loginPassword,
+          navigation: navigation,
+        };
+        props.loginUser(obj);
+      } else {
+        showMessage({
+          message: 'SolomoIT',
+          description: 'Missing the password field.',
+          type: 'warning',
+          duration: 1000,
+        });
+      }
+    } else {
+      showMessage({
+        message: 'SolomoIT',
+        description: 'Please type user name',
+        type: 'danger',
+        duration: 2000,
+      });
+    }
+  };
+
   return (
     <View style={Style.mainContainer}>
-      <Text style={Style.titleText}>Practical Test</Text>
+      <Text style={Style.titleText} allowFontScaling={false}>
+        Practical Test
+      </Text>
       <View style={Style.formView}>
         <View style={Style.textInputView}>
           <TextInput
@@ -39,7 +74,7 @@ const LoginScreen = props => {
         <TouchableOpacity
           style={Style.btn}
           onPress={() => {
-            navigation.navigate('home');
+            login();
           }}>
           <Text style={Style.btnTxt}>Login</Text>
         </TouchableOpacity>
@@ -50,8 +85,13 @@ const LoginScreen = props => {
 
 const mapStateToProps = state => {
   return {
-    loadingIndicate: state.main.loadingIndicate,
+    loginUserName: state.main.loginUserName,
+    loginPassword: state.main.loginPassword,
   };
 };
 
-export default connect(mapStateToProps, {})(LoginScreen);
+export default connect(mapStateToProps, {
+  setLoginPassword,
+  setLoginUserName,
+  loginUser,
+})(LoginScreen);
