@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   loginID: '',
   userData: {},
   totlePrice: 0,
+  indicatorState: false,
 };
 
 function loadingReducer(state = INITIAL_STATE, action) {
@@ -38,6 +39,8 @@ function loadingReducer(state = INITIAL_STATE, action) {
       return {...state, cartData: action.payload};
     case 'SET_TOTAL':
       return {...state, totlePrice: action.payload};
+    case 'LOADING_STATE':
+      return {...state, indicatorState: action.payload};
     case 'RESET':
       return INITIAL_STATE;
     default:

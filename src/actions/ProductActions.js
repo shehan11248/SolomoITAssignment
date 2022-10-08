@@ -60,6 +60,11 @@ export const getAllProduct = (skip, limit, data) => async dispatch => {
 export const getProductDetails = id => async dispatch => {
   let image = [];
 
+  dispatch({
+    type: 'LOADING_STATE',
+    payload: true,
+  });
+
   await URL.get(`products/${id}`)
     .then(response => {
       let obj = response.data;
@@ -79,6 +84,10 @@ export const getProductDetails = id => async dispatch => {
           dispatch({
             type: 'SET_SELECT_TAB',
             payload: 'pDetails',
+          });
+          dispatch({
+            type: 'LOADING_STATE',
+            payload: false,
           });
         },
       );

@@ -17,6 +17,7 @@ import {
 } from '../actions/ProductActions';
 import {setSelectTab} from '../actions/FooterActions';
 import {BarIndicator} from 'react-native-indicators';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import noData from '../assets/Icons/noData.png';
 
@@ -89,7 +90,7 @@ const ProductComponent = props => {
       <TouchableOpacity
         style={Style.productCard}
         onPress={() => {
-          props.getProductDetails(item.id)
+          props.getProductDetails(item.id);
         }}>
         <Text style={Style.cardTitleText} allowFontScaling={false}>
           {item.title}
@@ -107,6 +108,13 @@ const ProductComponent = props => {
 
   return (
     <View style={Style.mainView}>
+      <Spinner
+        visible={props.indicatorState}
+        textStyle={{color: 'white'}}
+        animation="slide"
+        overlayColor="rgba(0, 0, 0, 0.50)"
+        customIndicator={<BarIndicator color="white" />}
+      />
       <FlatList
         style={Style.flatList}
         data={props.productData}
@@ -132,6 +140,7 @@ const mapStateToProps = state => {
     loadingIndicate: state.main.loadingIndicate,
     isLoading: state.main.isLoading,
     productData: state.main.productData,
+    indicatorState: state.main.indicatorState,
   };
 };
 
@@ -139,5 +148,5 @@ export default connect(mapStateToProps, {
   getAllProduct,
   setIsLoading,
   setSelectTab,
-  getProductDetails
+  getProductDetails,
 })(ProductComponent);

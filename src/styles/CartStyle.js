@@ -81,7 +81,7 @@ module.exports = StyleSheet.create({
   },
 
   cardTitleText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: hp('1'),
   },
@@ -112,7 +112,7 @@ module.exports = StyleSheet.create({
     borderWidth: 6,
   },
   txt: {
-    fontSize: 15,
+    fontSize: 14,
     marginLeft: wp('2'),
   },
   emptyView: {

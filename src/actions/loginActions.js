@@ -1,5 +1,6 @@
 import URL from '../resources/baseUrl';
 import {AsyncStorage} from 'react-native';
+import {showMessage} from 'react-native-flash-message';
 
 export const setLoginUserName = text => async dispatch => {
   dispatch({
@@ -40,7 +41,14 @@ export const loginUser = data => async dispatch => {
 
       data.navigation.navigate('home');
     })
-    .catch(function (error) {});
+    .catch(function (error) {
+      showMessage({
+        message: 'SolomoIT',
+        description: error.response.data.message,
+        type: 'danger',
+        duration: 2000,
+      });
+    });
 };
 
 export const getUserData = id => async dispatch => {

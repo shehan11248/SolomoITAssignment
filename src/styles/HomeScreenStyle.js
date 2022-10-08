@@ -36,16 +36,16 @@ module.exports = StyleSheet.create({
     paddingRight: wp('10'),
   },
   titleText: {
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: 'bold',
   },
-  backText:{
-    fontSize: 18,
+  backText: {
+    fontSize: 16,
     fontWeight: 'bold',
   },
-  backView:{
-    width:wp('20'),
-    paddingLeft: wp('5')
+  backView: {
+    width: wp('20'),
+    paddingLeft: wp('5'),
   },
   btnView: {
     width: 30,

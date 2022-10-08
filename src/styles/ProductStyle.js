@@ -19,11 +19,11 @@ module.exports = StyleSheet.create({
     // backgroundColor: 'yellow',
   },
   cardTitleText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   cardDescriptionText: {
-    fontSize: 15,
+    fontSize: 14,
   },
   imageView: {
     width: wp('90'),
