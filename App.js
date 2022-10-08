@@ -6,6 +6,7 @@ import ReduxThunk from 'redux-thunk';
 import {applyMiddleware, createStore} from 'redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import LoadingScreen from './src/component/LoadingScreen';
 import LoginScreen from './src/component/LoginScreen';
 import HomeScreen from './src/component/HomeScreen';
 import FlashMessage from 'react-native-flash-message';
@@ -22,6 +23,14 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen
+            name="Loading"
+            component={LoadingScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+
           <Stack.Screen
             name="Login"
             component={LoginScreen}

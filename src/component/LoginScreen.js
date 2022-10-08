@@ -1,5 +1,11 @@
 import React, {useEffect} from 'react';
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  AsyncStorage,
+} from 'react-native';
 import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import Style from '../styles/LoginScreenStyle';
@@ -8,10 +14,35 @@ import {
   setLoginPassword,
   setLoginUserName,
   loginUser,
+  setLoginID,
 } from '../actions/loginActions';
+let SQLite = require('react-native-sqlite-storage');
+var db = SQLite.openDatabase({
+  name: 'SolomoIT',
+  createFromLocation: '~SolomoIT.db',
+});
 
 const LoginScreen = props => {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    // db.transaction(txs => {
+    //   txs.executeSql(
+    //     'INSERT INTO Cart (title,quantity,image,price) values (?,?,?,?)',
+    //     ['test1', 3, 'dsdsdsdsd.png', 300],
+    //     (tx, results) => {
+    //       console.log(results);
+    //     },
+    //   );
+    // });
+    // db.transaction(txs => {
+    //   txs.executeSql('SELECT * from Cart', [], (tx, results) => {
+    //     var item;
+    //     item = results.rows.item(1);
+    //     console.log(item);
+    //   });
+    // });
+  }, []);
 
   const login = () => {
     if (props.loginUserName !== '') {
@@ -94,4 +125,5 @@ export default connect(mapStateToProps, {
   setLoginPassword,
   setLoginUserName,
   loginUser,
+  setLoginID,
 })(LoginScreen);

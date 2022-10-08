@@ -14,7 +14,7 @@ const Header = props => {
           ? 'Products'
           : props.selectTab === 'cart'
           ? 'Cart'
-          : 'User'}
+          : props.userData.firstName}
       </Text>
     </View>
   );
@@ -23,6 +23,7 @@ const Header = props => {
 const mapStateToProps = state => {
   return {
     selectTab: state.main.selectTab,
+    userData: state.main.userData,
   };
 };
 

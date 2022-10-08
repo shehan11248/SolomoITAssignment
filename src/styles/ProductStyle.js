@@ -28,10 +28,22 @@ module.exports = StyleSheet.create({
   imageView: {
     width: wp('90'),
     height: hp('25'),
-    backgroundColor: 'gray',
     marginTop: hp('2'),
   },
   flatList: {
     width: wp('90'),
+  },
+  btnLoad: {
+    width: wp('90'),
+    height: hp('10'),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyView: {
+    width: wp('90'),
+    height: hp('70'),
+    alignItems: 'center',
+    justifyContent: 'center',
+    // backgroundColor: 'red',
   },
 });
