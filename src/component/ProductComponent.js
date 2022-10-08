@@ -1,15 +1,29 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, FlatList, RefreshControl, Image} from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  RefreshControl,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import Style from '../styles/ProductStyle';
-import {getAllProduct, setIsLoading} from '../actions/ProductActions';
+import {
+  getAllProduct,
+  setIsLoading,
+  getProductDetails,
+} from '../actions/ProductActions';
+import {setSelectTab} from '../actions/FooterActions';
 import {BarIndicator} from 'react-native-indicators';
 
 import noData from '../assets/Icons/noData.png';
 
 const ProductComponent = props => {
   const navigation = useNavigation();
+
+  const propsData = props;
 
   const [skip, setSkip] = useState(0);
   const [emptyState, setEmptyState] = useState(false);
@@ -70,6 +84,27 @@ const ProductComponent = props => {
     );
   };
 
+  const renderRow = ({item}) => {
+    return (
+      <TouchableOpacity
+        style={Style.productCard}
+        onPress={() => {
+          props.getProductDetails(item.id)
+        }}>
+        <Text style={Style.cardTitleText} allowFontScaling={false}>
+          {item.title}
+        </Text>
+        <Text
+          style={Style.cardDescriptionText}
+          allowFontScaling={false}
+          numberOfLines={1}>
+          {item.description}
+        </Text>
+        <Image style={Style.imageView} source={{uri: item.thumbnail}} />
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={Style.mainView}>
       <FlatList
@@ -91,23 +126,6 @@ const ProductComponent = props => {
   );
 };
 
-const renderRow = ({item}) => {
-  return (
-    <View style={Style.productCard}>
-      <Text style={Style.cardTitleText} allowFontScaling={false}>
-        {item.title}
-      </Text>
-      <Text
-        style={Style.cardDescriptionText}
-        allowFontScaling={false}
-        numberOfLines={1}>
-        {item.description}
-      </Text>
-      <Image style={Style.imageView} source={{uri: item.thumbnail}} />
-    </View>
-  );
-};
-
 const mapStateToProps = state => {
   return {
     selectTab: state.main.selectTab,
@@ -120,4 +138,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   getAllProduct,
   setIsLoading,
+  setSelectTab,
+  getProductDetails
 })(ProductComponent);

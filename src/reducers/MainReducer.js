@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   loginUserName: '',
   loginPassword: '',
   productData: [],
+  productDetails: {},
   loginID: '',
   userData: {},
 };
@@ -29,6 +30,8 @@ function loadingReducer(state = INITIAL_STATE, action) {
       return {...state, loginID: action.payload};
     case 'USER_DATA':
       return {...state, userData: action.payload};
+    case 'SELECT_PRODUCT_DATA':
+      return {...state, productDetails: action.payload};
     case 'RESET':
       return INITIAL_STATE;
     default:
