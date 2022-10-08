@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, BackHandler} from 'react-native';
 import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import Style from '../styles/HomeScreenStyle';
@@ -11,6 +11,7 @@ import PRODUCT from './ProductComponent';
 import CART from './Cart';
 import USER from './Profile';
 import PRODETAILS from './ProductDetails';
+import {setSelectTab} from '../actions/FooterActions';
 
 const HomeScreen = props => {
   const navigation = useNavigation();
@@ -19,6 +20,25 @@ const HomeScreen = props => {
     props.getAllProduct(0, 10, []);
     props.getUserData(props.loginID);
   }, []);
+
+  useEffect(() => {
+    const handleValidateClose = () => {
+      if (props.selectTab === 'home') {
+        BackHandler.exitApp();
+      } else {
+        props.setSelectTab('home');
+      }
+
+      return true;
+    };
+
+    const handler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleValidateClose,
+    );
+
+    return () => handler.remove();
+  });
 
   return (
     <View style={Style.mainContainer}>
@@ -49,4 +69,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   getAllProduct,
   getUserData,
+  setSelectTab,
 })(HomeScreen);

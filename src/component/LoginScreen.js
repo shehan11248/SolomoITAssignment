@@ -16,33 +16,9 @@ import {
   loginUser,
   setLoginID,
 } from '../actions/loginActions';
-let SQLite = require('react-native-sqlite-storage');
-var db = SQLite.openDatabase({
-  name: 'SolomoIT',
-  createFromLocation: '~SolomoIT.db',
-});
 
 const LoginScreen = props => {
   const navigation = useNavigation();
-
-  useEffect(() => {
-    // db.transaction(txs => {
-    //   txs.executeSql(
-    //     'INSERT INTO Cart (title,quantity,image,price) values (?,?,?,?)',
-    //     ['test1', 3, 'dsdsdsdsd.png', 300],
-    //     (tx, results) => {
-    //       console.log(results);
-    //     },
-    //   );
-    // });
-    // db.transaction(txs => {
-    //   txs.executeSql('SELECT * from Cart', [], (tx, results) => {
-    //     var item;
-    //     item = results.rows.item(1);
-    //     console.log(item);
-    //   });
-    // });
-  }, []);
 
   const login = () => {
     if (props.loginUserName !== '') {

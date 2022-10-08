@@ -25,7 +25,6 @@ export const setLoginID = text => async dispatch => {
 export const loginUser = data => async dispatch => {
   await URL.post('auth/login', data)
     .then(response => {
-      console.log(response);
       var obj = {
         id: response.data.id,
         token: response.data.token,
@@ -47,7 +46,6 @@ export const loginUser = data => async dispatch => {
 export const getUserData = id => async dispatch => {
   await URL.get(`users/${id}`)
     .then(response => {
-      console.log(response);
       dispatch({
         type: 'USER_DATA',
         payload: response.data,

@@ -17,8 +17,9 @@ module.exports = StyleSheet.create({
     height: hp('10'),
     borderBottomWidth: 3,
     borderColor: '#c0c9d2',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   footerView: {
     // backgroundColor: 'red',
@@ -37,6 +38,14 @@ module.exports = StyleSheet.create({
   titleText: {
     fontSize: 28,
     fontWeight: 'bold',
+  },
+  backText:{
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  backView:{
+    width:wp('20'),
+    paddingLeft: wp('5')
   },
   btnView: {
     width: 30,

@@ -8,7 +8,7 @@ import {setSelectTab} from '../../actions/FooterActions';
 import user from '../../assets/Icons/user.png';
 import userSelect from '../../assets/Icons/userSelect.png';
 import cart from '../../assets/Icons/cart.png';
-import cartSelect from '../../assets/Icons/userSelect.png';
+import cartSelect from '../../assets/Icons/cartSelect.png';
 import home from '../../assets/Icons/home.png';
 import homeSelect from '../../assets/Icons/homeSelect.png';
 

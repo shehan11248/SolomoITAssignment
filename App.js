@@ -9,6 +9,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import LoadingScreen from './src/component/LoadingScreen';
 import LoginScreen from './src/component/LoginScreen';
 import HomeScreen from './src/component/HomeScreen';
+import Checkout from './src/component/Checkout';
 import FlashMessage from 'react-native-flash-message';
 
 const Stack = createStackNavigator();
@@ -42,6 +43,14 @@ const App = () => {
           <Stack.Screen
             name="home"
             component={HomeScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="check"
+            component={Checkout}
             options={{
               headerShown: false,
             }}

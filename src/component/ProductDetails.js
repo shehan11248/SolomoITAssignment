@@ -10,7 +10,13 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {setSelectTab} from '../actions/FooterActions';
+import {getCartDetails, addCartDetails} from '../actions/ProductActions';
 import StarRating from 'react-native-star-rating';
+let SQLite = require('react-native-sqlite-storage');
+var db = SQLite.openDatabase({
+  name: 'SolomoIT',
+  createFromLocation: '~SolomoIT.db',
+});
 
 import back from '../assets/back.png';
 
@@ -19,6 +25,10 @@ const ProductDetails = props => {
 
   const [ref, setRef] = useState();
   const [value, setvalue] = useState(0.1);
+
+  useEffect(() => {
+    props.getCartDetails();
+  }, []);
 
   const renderItem = ({item, index}) => {
     return (
@@ -31,6 +41,20 @@ const ProductDetails = props => {
         />
       </View>
     );
+  };
+
+  const addToCard = () => {
+    let obj = {
+      id: props.productDetails.id,
+      title: props.productDetails.title,
+      qty: value * 10,
+      image:
+        props.productDetails.images[props.productDetails.images.length - 1]
+          .image,
+      price: props.productDetails.price * (value * 10),
+      data: props.cartData,
+    };
+    props.addCartDetails(obj);
   };
 
   return (
@@ -147,8 +171,18 @@ const ProductDetails = props => {
         </View>
       </ScrollView>
 
-      <TouchableOpacity style={Style.btn} onPress={() => {}}>
-        <Text style={Style.btnTxt}>Add to Cart</Text>
+      <TouchableOpacity
+        style={Style.btn}
+        onPress={() => {
+          addToCard();
+        }}>
+        {props.cartData.length === 0 ? (
+          <Text style={Style.btnTxt}>Add to Cart</Text>
+        ) : (
+          <Text style={Style.btnTxt}>
+            Add to Cart ({props.cartData.length})
+          </Text>
+        )}
       </TouchableOpacity>
     </View>
   );
@@ -158,9 +192,12 @@ const mapStateToProps = state => {
   return {
     selectTab: state.main.selectTab,
     productDetails: state.main.productDetails,
+    cartData: state.main.cartData,
   };
 };
 
 export default connect(mapStateToProps, {
   setSelectTab,
+  getCartDetails,
+  addCartDetails,
 })(ProductDetails);
